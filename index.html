@@ -3,36 +3,32 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Navbar (HTML + CSS only)</title>
+  <title>Navbar + Footer</title>
   <style>
     :root{
-      --bg:#0f1724;         /* navbar background */
-      --accent:#06b6d4;     /* accent / logo color */
-      --text:#e6eef7;       /* link text */
+      --bg:#0f1724;
+      --accent:#06b6d4;
+      --text:#e6eef7;
       --muted: rgba(230,238,247,0.6);
       --glass: rgba(255,255,255,0.03);
       --radius:12px;
       --shadow: 0 6px 20px rgba(2,6,23,0.6);
       --nav-height:64px;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      font-family: Inter, system-ui, sans-serif;
     }
-
     *{box-sizing:border-box}
     body{
       margin:0;
       min-height:100vh;
       background: linear-gradient(180deg,#071025 0%, #081428 60%);
       color:var(--text);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      padding:24px;
+      padding:0 24px;
     }
 
-    /* NAVBAR WRAPPER */
+    /* NAVBAR */
     .navbar{
-      width:100%;
       max-width:1100px;
-      margin:0 auto;
+      margin:20px auto;
       background:var(--glass);
       backdrop-filter: blur(6px);
       border-radius:var(--radius);
@@ -40,220 +36,126 @@
       height:var(--nav-height);
       display:flex;
       align-items:center;
-      gap:16px;
       padding:0 18px;
     }
+    .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);}
+    .logo{width:44px;height:44px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),#7c3aed);font-weight:700;color:#052028;}
+    .brand .title{font-weight:600;}
+    .brand .subtitle{font-size:12px;color:var(--muted);line-height:1;}
+    nav{flex:1;display:flex;align-items:center;justify-content:space-between;margin-left:12px;}
+    .nav-links{display:flex;gap:6px;}
+    .nav-links a{padding:8px 12px;border-radius:8px;text-decoration:none;color:var(--muted);font-weight:500;font-size:14px;transition:.2s;}
+    .nav-links a:hover{color:var(--text);background:rgba(255,255,255,0.05);}
+    .btn{padding:8px 14px;border-radius:10px;text-decoration:none;background:linear-gradient(90deg,var(--accent),#7c3aed);color:#032027;font-weight:700;}
+    .nav-right{display:flex;gap:12px;align-items:center;}
+    .icon-btn{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;color:var(--muted);transition:.2s;}
+    .icon-btn:hover{color:var(--text);}
+    .menu-toggle{display:none;}
+    .hamburger{display:none;width:44px;height:44px;border-radius:10px;align-items:center;justify-content:center;cursor:pointer;}
+    .hamburger .line{width:20px;height:2px;background:var(--muted);border-radius:2px;position:relative;}
+    .hamburger .line::before,.hamburger .line::after{content:'';position:absolute;left:0;width:20px;height:2px;background:var(--muted);border-radius:2px;}
+    .hamburger .line::before{top:-6px}.hamburger .line::after{top:6px}
+    .menu-panel{display:none;}
 
-    /* LOGO */
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      text-decoration:none;
-      color:var(--text);
+    /* FOOTER */
+    .footer{
+      background:#0f1724;
+      color:#e6eef7;
+      margin-top:60px;
+      padding:40px 20px 20px;
+      border-radius:12px 12px 0 0;
     }
-    .logo{
-      width:44px;
-      height:44px;
-      border-radius:10px;
-      display:inline-grid;
-      place-items:center;
-      background:linear-gradient(135deg,var(--accent),#7c3aed);
-      font-weight:700;
-      color:#052028;
-      box-shadow: 0 6px 18px rgba(4,20,26,0.45);
-      transform:translateZ(0);
+    .footer-container{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+      gap:30px;
+      max-width:1100px;
+      margin:0 auto;
     }
-    .brand .title{
-      font-weight:600;
-      letter-spacing:0.2px;
-    }
-    .brand .subtitle{
-      font-size:12px;
-      color:var(--muted);
-      line-height:1;
-    }
-
-    /* NAV ITEMS */
-    nav{
-      margin-left:12px;
-      flex:1;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-    }
-    .nav-left{
-      display:flex;
-      gap:12px;
-      align-items:center;
-    }
-    .nav-links{
-      display:flex;
-      gap:6px;
-      align-items:center;
-    }
-    .nav-links a{
-      padding:8px 12px;
-      border-radius:8px;
-      text-decoration:none;
-      color:var(--muted);
-      font-weight:500;
-      transition:all .18s ease;
-      font-size:14px;
-    }
-    .nav-links a:hover{
-      color:var(--text);
-      background:rgba(255,255,255,0.03);
-      transform:translateY(-3px);
-      box-shadow:0 6px 18px rgba(2,6,23,0.25);
-    }
-    .btn{
-      padding:8px 14px;
-      border-radius:10px;
-      text-decoration:none;
-      background:linear-gradient(90deg,var(--accent),#7c3aed);
-      color:#032027;
-      font-weight:700;
-      box-shadow:0 8px 22px rgba(7,22,28,0.45);
-      transition:transform .15s ease;
-      font-size:14px;
-    }
-    .btn:hover{ transform:translateY(-3px) }
-
-    /* RIGHT SIDE */
-    .nav-right{
-      display:flex;
-      gap:12px;
-      align-items:center;
-    }
-    .icon-btn{
-      width:40px;height:40px;border-radius:10px;display:grid;place-items:center;
-      background:transparent;border:1px solid rgba(255,255,255,0.03); color:var(--muted);
-      transition:all .15s ease;
-    }
-    .icon-btn:hover{ color:var(--text); transform:translateY(-3px);}
-
-    /* MOBILE: checkbox hack */
-    .menu-toggle{
-      display:none;
-    }
-    .hamburger{
-      display:none;
-      width:44px;height:44px;border-radius:10px;align-items:center;justify-content:center;
-      cursor:pointer;background:transparent;border:1px solid rgba(255,255,255,0.03);
-    }
-    .hamburger .line{
-      width:20px;height:2px;background:var(--muted);border-radius:2px;display:block;position:relative;
-    }
-    .hamburger .line::after, .hamburger .line::before{
-      content:'';position:absolute;left:0;width:20px;height:2px;background:var(--muted);border-radius:2px;
-    }
-    .hamburger .line::before{top:-6px}
-    .hamburger .line::after{top:6px}
-
-    /* RESPONSIVE */
-    @media (max-width:900px){
-      .nav-links{ display:none; } /* hide desktop links */
-      .hamburger{ display:flex; }
-      .nav-right .btn{ display:none; } /* hide sign-in button on small */
-      nav{ gap:8px; }
-      /* when checkbox checked - show mobile menu */
-      .menu-panel{
-        position:fixed;
-        left:12px; right:12px;
-        top: calc(var(--nav-height) + 36px);
-        background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-        border-radius:12px;
-        padding:12px;
-        box-shadow: 0 20px 40px rgba(2,6,23,0.6);
-        transform-origin:top center;
-        opacity:0;
-        pointer-events:none;
-        transform:scale(.98) translateY(-6px);
-        transition: all .22s cubic-bezier(.2,.9,.3,1);
-        z-index:999;
-      }
-      .menu-panel a{
-        display:block;padding:10px 12px;border-radius:8px;color:var(--muted);text-decoration:none;margin-bottom:6px;
-      }
-      .menu-panel a:hover{ color:var(--text); background:rgba(255,255,255,0.02); transform:none; }
-      .menu-toggle:checked ~ .menu-panel{
-        opacity:1; pointer-events:auto; transform:scale(1) translateY(0);
-      }
-      /* animate hamburger to X when open */
-      .menu-toggle:checked + .hamburger .line{
-        background:transparent;
-      }
-      .menu-toggle:checked + .hamburger .line::before{
-        transform:rotate(45deg); top:0;
-      }
-      .menu-toggle:checked + .hamburger .line::after{
-        transform:rotate(-45deg); top:0;
-      }
-    }
-
-    /* small tweak for very small screens */
-    @media (max-width:420px){
-      .brand .title{ font-size:15px }
-      .brand .subtitle{ display:none }
-    }
+    .footer h2{margin:0 0 10px;font-size:22px;color:#06b6d4;}
+    .footer h3{font-size:16px;margin-bottom:12px;color:#7cdbf0;}
+    .footer p{font-size:14px;color:rgba(230,238,247,0.7);}
+    .footer a{display:block;text-decoration:none;color:rgba(230,238,247,0.7);font-size:14px;margin-bottom:8px;transition:.2s;}
+    .footer a:hover{color:#fff;}
+    .social a{display:inline-block;margin-right:10px;font-size:20px;transition:.2s;}
+    .social a:hover{transform:translateY(-3px);}
+    .footer-newsletter input{padding:10px;border:none;border-radius:8px;margin-top:8px;width:70%;}
+    .footer-newsletter button{padding:10px 14px;border:none;border-radius:8px;background:linear-gradient(90deg,#06b6d4,#7c3aed);color:#032027;font-weight:600;cursor:pointer;}
+    .footer-bottom{text-align:center;padding-top:20px;margin-top:30px;border-top:1px solid rgba(255,255,255,0.08);font-size:13px;color:rgba(230,238,247,0.6);}
   </style>
 </head>
 <body>
 
-  <header class="navbar" role="banner">
-    <a href="#" class="brand" aria-label="Homepage">
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <a href="#" class="brand">
       <span class="logo">W</span>
       <div>
         <div class="title">Waleed Dev</div>
         <div class="subtitle">Shop & Studio</div>
       </div>
     </a>
-
-    <nav role="navigation">
-      <!-- CSS checkbox for mobile toggle -->
-      <input id="menu-toggle" class="menu-toggle" type="checkbox" aria-hidden="true" />
-
-      <!-- Hamburger visible on small screens -->
-      <label for="menu-toggle" class="hamburger" aria-hidden="true">
-        <span class="line"></span>
-      </label>
-
-      <!-- Left side (desktop links) -->
-      <div class="nav-left">
-        <div class="nav-links" role="menubar" aria-label="Main menu">
-          <a href="#" role="menuitem">Home</a>
-          <a href="#" role="menuitem">Shop</a>
-          <a href="#" role="menuitem">Collections</a>
-          <a href="#" role="menuitem">About</a>
-        </div>
-      </div>
-
-      <!-- Right side -->
-      <div class="nav-right">
-        <a class="icon-btn" href="#" title="Search" aria-label="Search">
-          🔍
-        </a>
-        <a class="icon-btn" href="#" title="Cart" aria-label="Cart">
-          🛒
-        </a>
-        <a class="btn" href="#" title="Sign in">Sign In</a>
-      </div>
-
-      <!-- Mobile menu panel (appears when checkbox is checked) -->
-      <div class="menu-panel" aria-hidden="true">
+    <nav>
+      <div class="nav-links">
         <a href="#">Home</a>
         <a href="#">Shop</a>
         <a href="#">Collections</a>
         <a href="#">About</a>
-        <a href="#" class="btn" style="display:block; margin-top:8px; text-align:center;">Sign In</a>
+      </div>
+      <div class="nav-right">
+        <a class="icon-btn" href="#">🔍</a>
+        <a class="icon-btn" href="#">🛒</a>
+        <a class="btn" href="#">Sign In</a>
       </div>
     </nav>
   </header>
 
-  <!-- demo filler -->
-  <main style="max-width:1100px;margin:22px auto;color:var(--muted)">
-    <p>Navbar ready — copy the above into your page. Customize colors, links, or logo text as you like.</p>
+  <!-- MAIN CONTENT DEMO -->
+  <main style="max-width:1100px;margin:40px auto;color:var(--muted);">
+    <h1>Welcome to Waleed Dev Shop</h1>
+    <p>Yahan tumhara content ayega…</p>
   </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h2>Waleed Dev</h2>
+        <p>Shop & Studio – Quality you can trust.</p>
+        <div class="social">
+          <a href="#">🌐</a>
+          <a href="#">🐦</a>
+          <a href="#">📷</a>
+          <a href="#">▶️</a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <a href="#">Home</a>
+        <a href="#">Shop</a>
+        <a href="#">Collections</a>
+        <a href="#">About</a>
+      </div>
+      <div class="footer-links">
+        <h3>Support</h3>
+        <a href="#">Contact</a>
+        <a href="#">FAQs</a>
+        <a href="#">Shipping</a>
+        <a href="#">Returns</a>
+      </div>
+      <div class="footer-newsletter">
+        <h3>Subscribe</h3>
+        <p>Get the latest updates and offers.</p>
+        <form>
+          <input type="email" placeholder="Enter your email" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Waleed Dev. All rights reserved.</p>
+    </div>
+  </footer>
+
 </body>
 </html>
